@@ -1,27 +1,15 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-parameters:
-- name: myString
-  type: string
-  default: a string
-- name: myMultiString
-  type: string
-  default: kumar
-  values:
-  - $secrete
-  - $sercret_value
-
-trigger:
-- main
-
-pool:
-  vmImage: ubuntu-latest
+variables:
+- name: one
+  value: initialValue 
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-
-  
+  - script: |
+      echo ${{ variables.one }} # outputs initialValue
+      echo $(one)
+    displayName: First variable pass
+  - bash: echo "##vso[task.setvariable variable=one]secondValue"
+    displayName: Set new variable value
+  - script: |
+      echo ${{ variables.one }} # outputs initialValue
+      echo $(one) # outputs secondValue
+    displayName: Second variable pass

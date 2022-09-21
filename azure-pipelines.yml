@@ -8,10 +8,10 @@ parameters:
   default: a string
 - name: myMultiString
   type: string
-  default: default
+  default: kumar
   values:
-  - default
-  - ubuntu
+  - $secrete
+  - $sercret_value
 
 trigger:
 - main
